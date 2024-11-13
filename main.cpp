@@ -1,16 +1,27 @@
 #include <iostream>
-#include "Autobot.h"
-#include "Decepticon.h"
-#include "Engine.h"
-#include "Weapon.h"
-int main() {
-    Engine engine("V8", 400);
-    Autobot bumblebee("Bumblebee", 75, engine, "Autobots");
-    Decepticon megatron("Megatron", 90, engine, 80);
-    
+#include "autobot.h"
+#include "decepticon.h"
+#include "maximal.h"
 
-    std::cout << bumblebee.getName() << ": " << bumblebee.transform() << std::endl;
-    std::cout << megatron.getName() << ": " << megatron.transform() << std::endl;
+int main() {
+    
+    Autobot optimusPrime("Optimus Prime", "Sword");
+    Decepticon megatron("Megatron", "Cannon");
+    Maximal optimusPrimal("Optimus Primal");
+
+    
+    std::cout << "Demonstrating Autobot:" << std::endl;
+    optimusPrime.transform();
+    optimusPrime.useWeapon();
+    optimusPrime.assist();
+
+    std::cout << "\nDemonstrating Decepticon:" << std::endl;
+    megatron.transform();
+    megatron.useWeapon();
+    megatron.sabotage();
+
+    std::cout << "\nDemonstrating Maximal:" << std::endl;
+    optimusPrimal.transform();
 
     return 0;
 }

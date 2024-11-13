@@ -5,13 +5,12 @@
 
 class Weapon {
 private:
-    std::string name;
-    int damage;
+    std::string type;
 
 public:
-    Weapon(const std::string& name, int damage);
-    std::string getName() const;
-    int getDamage() const;
+    explicit Weapon(const std::string &type);
+
+    void use() const;
 };
 
-#endif
+#endif // WEAPON_H

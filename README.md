@@ -8,4 +8,4 @@ masumovali5@gmail.com, st135761student.spbu.ru
 ## Build
 make
 ## Run
-./transformer
+./transformers

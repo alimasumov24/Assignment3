@@ -1,11 +1,8 @@
 #include "Weapon.h"
+#include <iostream>
 
-Weapon::Weapon(const std::string& name, int damage) : name(name), damage(damage) {}
+Weapon::Weapon(const std::string &type) : type(type) {}
 
-std::string Weapon::getName() const {
-    return name;
-}
-
-int Weapon::getDamage() const {
-    return damage;
+void Weapon::use() const {
+    std::cout << "Using weapon: " << type << std::endl;
 }
