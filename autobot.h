@@ -1,24 +1,29 @@
+#include "Transformers.h"
 #ifndef AUTOBOT_H
 #define AUTOBOT_H
+#include <iostream>
+#include <string>
 
-#include "transformer.h"
-#include "Weapon.h"
+class Autobot : public BaseTransformer{
+    private:
+        std::string _moralAlignment;
+        std::string _groundVehicle;
+    
+    public:
+    static int  autobotCounter;
+    //constructor
+    Autobot();
+    //constructor with parameter
+    Autobot(std::string moral, std::string vehicle);
 
-class Autobot : public Transformer {
-private:
-    Weapon weapon;
 
-public:
-    Autobot(const std::string& name, const std::string& weaponType)
-        : Transformer(name, "Autobot"), weapon(weaponType) {}
 
-    virtual ~Autobot() = default; 
+    std::string getMoralAlignemt() const;
+    void setMoralAlignmet(std::string newMoralAlignment);
 
-    bool assist(); 
-
-    void transform() override; 
-
-    void useWeapon() const;
-};
-
-#endif // AUTOBOT_H
+   std:: string getGroundVehicle() const;
+    void setGroundVehicle(std::string newGroundVehicle);
+    void aboutRobot()  override;
+    
+ };
+#endif

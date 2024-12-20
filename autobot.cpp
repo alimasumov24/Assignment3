@@ -1,15 +1,31 @@
 #include "autobot.h"
-#include <iostream>
+#include <string>
 
-bool Autobot::assist() {
-    std::cout << name << " is assisting!" << std::endl;
-    return true;
+  //+1 when an object is created
+    
+//constructor
+
+Autobot::Autobot(std::string moral, std::string vehicle){
+    _moralAlignment = moral;
+    _groundVehicle= vehicle;
 }
 
-void Autobot::transform() {
-    std::cout << name << " is transforming!" << std::endl;
-}
+Autobot::Autobot(){
+        autobotCounter++;
+    }
 
-void Autobot::useWeapon() const {
-    weapon.use();
+std::string Autobot :: getMoralAlignemt() const{
+        return _moralAlignment;
+    }
+    void setMoralAlignmet(std::string newMoralAlignment);
+
+    std::string Autobot :: getGroundVehicle() const{
+        return _groundVehicle;
+    }
+    void setGroundVehicle(std::string newGroundVehicle);
+
+//information about the transformer
+void Autobot :: aboutRobot() {
+    std::cout<<"MoralAlignement : "<<_moralAlignment<<"\n";
+    std::cout<<"groundVehicle : "<<_groundVehicle<<"\n";
 }

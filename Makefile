@@ -1,42 +1,53 @@
-TEST_TARGET = test_transformers
+PROJECT = transformers
+
+LIBPROJECT = $(PROJECT).a
+
+TESTPROJECT = test-$(PROJECT)
 
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -I/usr/include/gtest
 
-LIBS = -lgtest -lgtest_main -pthread
+A = ar
 
-SRCS = test_transformers.cpp transformer.cpp autobot.cpp decepticon.cpp maximal.cpp Weapon.cpp
-OBJS = $(SRCS:.cpp=.o)
+AFLAGS = rsv
 
-all: $(TEST_TARGET)
+CXXFLAGS = -I. -std=c++17 -Wall -g -fPIC
 
-$(TEST_TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+LDXXFLAGS = $(CXXFLAGS) -L. -l:$(LIBPROJECT)
 
-test_transformers.o: test_transformers.cpp transformer.h autobot.h decepticon.h maximal.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c test_transformers.cpp
+LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
 
-transformer.o: transformer.cpp transformer.h
-	$(CXX) $(CXXFLAGS) -c transformer.cpp
+DEPS = $(wildcard *.h)
 
-autobot.o: autobot.cpp autobot.h transformer.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c autobot.cpp
+OBJ = Transformers.o decepticon.o minicon.o decepticon.o instrument.o blaster.o 
 
-decepticon.o: decepticon.cpp decepticon.h transformer.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c decepticon.cpp
+TEST_OBJ = test_transformers.o 
 
-maximal.o: maximal.cpp maximal.h transformer.h
-	$(CXX) $(CXXFLAGS) -c maximal.cpp
+.PHONY: default
 
-Weapon.o: Weapon.cpp Weapon.h
-	$(CXX) $(CXXFLAGS) -c Weapon.cpp
+default: all
+
+%.o: %.cpp $(DEPS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+$(LIBPROJECT): $(OBJ)
+	$(A) $(AFLAGS) $@ $^
+
+$(PROJECT): main.o $(LIBPROJECT)
+	$(CXX) -o $@ main.o $(LDXXFLAGS)
+
+$(TESTPROJECT): $(LIBPROJECT) $(TEST_OBJ)
+	$(CXX) -o $@ $(TEST_OBJ) $(LDGTESTFLAGS)
+
+test: $(TESTPROJECT)
+
+all: $(PROJECT)
+
+.PHONY: clean
 
 clean:
-	rm -f *.o $(TEST_TARGET)
+	rm -f *.o
 
-.PHONY: all clean
-
-
-
-
-
+cleanall: clean
+	rm -f $(PROJECT)
+	rm -f $(LIBPROJECT)
+	rm -f $(TESTPROJECT)

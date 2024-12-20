@@ -1,15 +1,28 @@
-#include "decepticon.h"
-#include <iostream>
+#include "decepticon.h"  
 
-bool Decepticon::sabotage() {
-    std::cout << name << " is sabotaging!" << std::endl;
-    return true;
+Decepticon::Decepticon() {}  
+Decepticon::Decepticon(std::string beast, std::string peace) {
+    _beastForm = beast;
+    _peaceful = peace;
 }
 
-void Decepticon::transform() {
-    std::cout << name << " is transforming!" << std::endl;
+std::string Decepticon::getBeastForm() const {
+    return _beastForm;
 }
 
-void Decepticon::useWeapon() const {
-    weapon.use();
+void Decepticon::setDinosaurForm(std::string newBeastForm) {
+    _beastForm = newBeastForm;  // Assuming you want to set the new beast form
+}
+
+std::string Decepticon::getPeaceful() const {
+    return _peaceful;
+}
+
+void Decepticon::setPeaceful(std::string newPeaceful) {
+    _peaceful = newPeaceful;  // Assuming you want to set the new peaceful state
+}
+
+void Decepticon::aboutRobot() {
+    std::cout << "BeastForm : " << _beastForm << "\n";
+    std::cout << "Peace : " << _peaceful << "\n";
 }
