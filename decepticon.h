@@ -1,24 +1,24 @@
-#include "Transformers.h"
-#ifndef DECEPTICON_H  
+#ifndef DECEPTICON_H
 #define DECEPTICON_H
-#include <iostream>
-#include <string>
 
-class Decepticon : public BaseTransformer { 
+#include "transformer.h"
+#include "Weapon.h"
+
+class Decepticon : public Transformer {
 private:
-    std::string _beastForm;
-    std::string _peaceful;
+    Weapon weapon;
 
 public:
-    // Constructors
-    Decepticon();  
-    Decepticon(std::string beast, std::string peace);  
-    std::string getBeastForm() const;
-    void setDinosaurForm(std::string newBeastForm);
+    Decepticon(const std::string& name, const std::string& weaponType)
+        : Transformer(name, "Decepticon"), weapon(weaponType) {}
 
-    std::string getPeaceful() const;
-    void setPeaceful(std::string newPeaceful);
-    void aboutRobot() override;  
+    virtual ~Decepticon() = default;
+
+    bool sabotage(); 
+
+    void transform() override; 
+
+    void useWeapon() const;
 };
 
-#endif  // 
+#endif // DECEPTICON_H

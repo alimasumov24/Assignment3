@@ -1,42 +1,65 @@
-#include <gtest/gtest.h>
-#include "Transformers.h"
 #include "autobot.h"
-#include "minicon.h"   
-#include "decepticon.h"  
-#include <iostream>
+#include "decepticon.h"
+#include "maximal.h"
+#include <gtest/gtest.h>
 
-// Base class test
-TEST(TransformerTest, transformers) {
-    BaseTransformer myRobo2;
-    myRobo2.setName("Titanus");
-    myRobo2.setHeight(150);
-    EXPECT_EQ(myRobo2.getHeight(), 150);
-    EXPECT_EQ(myRobo2.getName(), "Titanus");
+
+TEST(TransformerTest, AutobotTransform) {
+    Autobot autobot("Optimus Prime", "Sword");
+    testing::internal::CaptureStdout();
+    autobot.transform();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Optimus Prime is transforming!\n");
 }
 
-// Autobots
-// We initialized the value of the autobots counter 
-int Autobot::autobotCounter = 0;
-TEST(AutobotTest, autobotsCount) {
-    Autobot autobot;
-    Autobot autobot1;
-    Autobot autobotQ;
-    EXPECT_EQ(Autobot::autobotCounter, 3);
+TEST(TransformerTest, AutobotUseWeapon) {
+    Autobot autobot("Optimus Prime", "Sword");
+    testing::internal::CaptureStdout();
+    autobot.useWeapon();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Using weapon: Sword\n");
 }
 
-// Minicons
-// We initialized the value of the counter 
-int Minicon::miniconCounter = 0; 
-TEST(MiniconTest, miniconsCount) {
-    Minicon minicon; 
-    EXPECT_EQ(Minicon::miniconCounter, 1); 
+TEST(TransformerTest, AutobotAssist) {
+    Autobot autobot("Optimus Prime", "Sword");
+    testing::internal::CaptureStdout();
+    autobot.assist();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Optimus Prime is assisting!\n");
 }
 
-// Decepticons
-TEST(DecepticonTest, decepticonGetName) { 
-    Decepticon decepticon; 
-    decepticon.setName("Chidima");
-    EXPECT_EQ(decepticon.getName(), "Chidima");
+// Тесты для класса Decepticon
+TEST(TransformerTest, DecepticonTransform) {
+    Decepticon decepticon("Megatron", "Cannon");
+    testing::internal::CaptureStdout();
+    decepticon.transform();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Megatron is transforming!\n");
+}
+
+TEST(TransformerTest, DecepticonUseWeapon) {
+    Decepticon decepticon("Megatron", "Cannon");
+    testing::internal::CaptureStdout();
+    decepticon.useWeapon();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Using weapon: Cannon\n");
+}
+
+TEST(TransformerTest, DecepticonSabotage) {
+    Decepticon decepticon("Megatron", "Cannon");
+    testing::internal::CaptureStdout();
+    decepticon.sabotage();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Megatron is sabotaging!\n");
+}
+
+
+TEST(TransformerTest, MaximalTransform) {
+    Maximal maximal("Optimus Primal");
+    testing::internal::CaptureStdout();
+    maximal.transform();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Optimus Primal is transforming!\n");
 }
 
 int main(int argc, char **argv) {
