@@ -1,42 +1,25 @@
-TEST_TARGET = test_transformers
+CC=g++
+CFLAGS=-Werror -Wpedantic -Wall -std=c++17
+LDFLAGS=-lgtest -lgtest_main -lpthread
+SOURCES=Transformer.cpp Weapon.cpp Autobot.cpp Decepticon.cpp test_transformer.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=tests
 
-CXX = g++
-CXXFLAGS = -Wall -std=c++17 -I/usr/include/gtest
+all: $(EXECUTABLE)
 
-LIBS = -lgtest -lgtest_main -pthread
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
 
-SRCS = test_transformers.cpp transformer.cpp autobot.cpp decepticon.cpp maximal.cpp Weapon.cpp
-OBJS = $(SRCS:.cpp=.o)
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(TEST_TARGET)
 
-$(TEST_TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+dependencies: $(SOURCES) $(HEADERS)
+	$(CC) -MM $(SOURCES) > dependencies.mk
 
-test_transformers.o: test_transformers.cpp transformer.h autobot.h decepticon.h maximal.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c test_transformers.cpp
+-include dependencies.mk
 
-transformer.o: transformer.cpp transformer.h
-	$(CXX) $(CXXFLAGS) -c transformer.cpp
-
-autobot.o: autobot.cpp autobot.h transformer.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c autobot.cpp
-
-decepticon.o: decepticon.cpp decepticon.h transformer.h Weapon.h
-	$(CXX) $(CXXFLAGS) -c decepticon.cpp
-
-maximal.o: maximal.cpp maximal.h transformer.h
-	$(CXX) $(CXXFLAGS) -c maximal.cpp
-
-Weapon.o: Weapon.cpp Weapon.h
-	$(CXX) $(CXXFLAGS) -c Weapon.cpp
+.PHONY: clean
 
 clean:
-	rm -f *.o $(TEST_TARGET)
-
-.PHONY: all clean
-
-
-
-
-
+	rm -rf $(EXECUTABLE) $(OBJECTS) *.

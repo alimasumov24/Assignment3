@@ -4,13 +4,15 @@
 #include <string>
 
 class Weapon {
-private:
-    std::string type;
-
 public:
-    explicit Weapon(const std::string &type);
+    Weapon(const std::string &type);
+    ~Weapon();
 
-    void use() const;
+    std::string getType() const;
+    void setType(const std::string &type);
+
+private:
+    std::string type_;
 };
 
 #endif // WEAPON_H

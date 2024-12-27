@@ -1,27 +1,23 @@
+#include "Autobot.h"
+#include "Decepticon.h"
+#include "Weapon.h"
 #include <iostream>
-#include "autobot.h"
-#include "decepticon.h"
-#include "maximal.h"
 
 int main() {
-    
-    Autobot optimusPrime("Optimus Prime", "Sword");
-    Decepticon megatron("Megatron", "Cannon");
-    Maximal optimusPrimal("Optimus Primal");
+    Autobot optimus("Optimus Prime", 100, 90, 80, 95);
+    Decepticon megatron("Megatron", 95, 85, 90, 100);
 
-    
-    std::cout << "Demonstrating Autobot:" << std::endl;
-    optimusPrime.transform();
-    optimusPrime.useWeapon();
-    optimusPrime.assist();
+    optimus.transform();
+    optimus.defend();
 
-    std::cout << "\nDemonstrating Decepticon:" << std::endl;
     megatron.transform();
-    megatron.useWeapon();
-    megatron.sabotage();
+    megatron.deceive();
 
-    std::cout << "\nDemonstrating Maximal:" << std::endl;
-    optimusPrimal.transform();
+    Weapon blaster("Blaster");
+    optimus.setPower(optimus.getPower() + 10);
+
+    std::cout << "Optimus Power: " << optimus.getPower() << std::endl;
+    std::cout << "Megatron Cunning: " << megatron.getCunning() << std::endl;
 
     return 0;
 }
