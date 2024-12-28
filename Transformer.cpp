@@ -40,6 +40,14 @@ void Transformer::setArmor(int armor) {
     armor_ = armor;
 }
 
+Weapon* Transformer::getWeapon() const{
+    return weapon_;
+}
+
+void Transformer::setWeapon(Weapon *gun){
+    weapon_ = gun;
+}
+
 void Transformer::transform() const {
     // Transformation logic
 }

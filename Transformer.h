@@ -22,6 +22,9 @@ public:
     int getArmor() const;
     void setArmor(int armor);
 
+    Weapon* getWeapon() const;
+    void setWeapon(Weapon *);
+
     virtual void transform() const;
     virtual void attack() const;
 
